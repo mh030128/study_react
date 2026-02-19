@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { TodoContext } from '../App';
+import { TodoDispatchContext } from '../App';
 import './TodoItem.css';
 
-const TodoItem = ({ id, content, isDone, createDate, onUpdate, onDelete }) => 
-    {
-        console.log(`${id} TodoItem update`);
-        const onChangeCheckbox = () => {
-            onUpdate(id);
-        };
-        const onClickDelete = () => {
-            alert("삭제하시겠습니까?");
-            onDelete(id);
+const TodoItem = ({ id, content, isDone, createDate }) => {
+    console.log(`${id} TodoItem Update`);
+    const { onUpdate, onDelete } = useContext(TodoDispatchContext);
+
+    const onChangeCheckbox = () => {
+        onUpdate(id);
+    };
+
+    const onClickDelete = () => {
+        alert("삭제하시겠습니까?");
+        onDelete(id);
     };
     
     return (
@@ -24,6 +28,6 @@ const TodoItem = ({ id, content, isDone, createDate, onUpdate, onDelete }) =>
             </div>
         </div>
     );
-}
+};
 
 export default React.memo(TodoItem) ;

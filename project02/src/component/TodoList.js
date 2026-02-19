@@ -1,8 +1,11 @@
-import { useState, useMemo } from "react";
+import { useContext, useState, useMemo } from "react";
+import { TodoContext } from "../App";
+import { TodoStateContext } from "../App";
 import TodoItem from "./TodoItem";
 import "./TodoList.css";
 
-const Todolist = ({ todo, onUpdate, onDelete }) => {
+const TodoList = () => {
+    const todo = useContext(TodoStateContext);
     const [search, setSearch] = useState("");
     const onChangeSearch = (e) => {
         setSearch(e.target.value);
@@ -39,11 +42,14 @@ const Todolist = ({ todo, onUpdate, onDelete }) => {
             className="searchbar" placeholder="검색어를 입력하세요" />
             <div className="list_wrapper">
                 {getSearchResult().map((it) => (
-                    <TodoItem key={it.id} {...it} onUpdate={onUpdate} onDelete={onDelete} />
+                    <TodoItem key={it.id} {...it} />
                 ))}
             </div>
         </div>
     );
 };
 
-export default Todolist ; 
+// TodoList.defaultProps = {
+//     todo: [],
+// };
+export default TodoList ; 
