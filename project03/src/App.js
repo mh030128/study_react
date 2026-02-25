@@ -6,29 +6,29 @@ import New from "./pages/New";
 import Diary from "./pages/Diary";
 import Edit from "./pages/Edit";
 
+const yesterday = new Date();
+yesterday.setDate(yesterday.getDate() - 1);
+
 const mockData = [
   {
     id: "mock1",
-    date: new Date().getTime(),
+    date: new Date().getTime() -1,
     content: "mock1",
     emotionId: 1,
   },
   {
     id: "mock2",
-    date: new Date().getTime(),
+    date: yesterday.getTime(),
     content: "mock2",
     emotionId: 2,
   },
   {
     id: "mock3",
-    date: new Date().getTime(),
+    date: yesterday.getTime(),
     content: "mock3",
     emotionId: 3,
   },
 ];
-
-export const DiaryStateContext = React.createContext();
-export const DiaryDispatchContext = React.createContext();
 
 function reducer(state, action) {
   switch (action.type) {
@@ -49,6 +49,9 @@ function reducer(state, action) {
     }
   }
 }
+
+export const DiaryStateContext = React.createContext();
+export const DiaryDispatchContext = React.createContext();
 
 function App() {
   const [isDataLoaded, setIsDataLoaded] = useState(false);
@@ -76,7 +79,7 @@ function App() {
     idRef.current += 1;
   };
 
-  const onUpate = (targetId, date, content, emotionId) => {
+  const onUpdate = (targetId, date, content, emotionId) => {
     dispatch({
       type: "UPDATE",
       data: {
@@ -91,7 +94,7 @@ function App() {
   const onDelete = (targetId) => {
     dispatch({
       type: "DELETE",
-      id: targetId,
+      targetId,
     });
   };
 
@@ -103,7 +106,7 @@ function App() {
         <DiaryDispatchContext.Provider
           value={{
             onCreate,
-            onUpate,
+            onUpdate,
             onDelete
           }}
         >

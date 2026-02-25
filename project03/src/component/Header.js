@@ -10,4 +10,4 @@ const Header = ({ title, leftChild, rightChild }) => {
   );
 };
 
-export default Header ;
+export default Header ; 
