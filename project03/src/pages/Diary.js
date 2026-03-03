@@ -3,11 +3,17 @@ import useDiary from "../hooks/useDiary";
 import Button from "../component/Button";
 import Header from "../component/Header";
 import Viewer from "../component/Viewer";
-import { getFormattedDate } from "../util";
+import { getFormattedDate, setPageTitle } from "../util";
+import { useEffect } from "react";
 
 const Diary = () => {
+  
   const { id } = useParams();
   const data = useDiary(id);
+  
+  useEffect(() => {
+    setPageTitle(`${id}번 일기`);
+  }, []);
   
   const navigate = useNavigate();
   

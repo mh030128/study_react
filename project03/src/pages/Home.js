@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect } from "react";
 import { DiaryStateContext } from "../App";
-import { getMonthRangeByDate } from "../util";
+import { getMonthRangeByDate, setPageTitle } from "../util";
 import Button from "../component/Button";
 import Header from "../component/Header";
 import DiaryList from "../component/DiaryList";
@@ -13,6 +13,7 @@ const Home = () => {
   const headerTitle = `${pivotDate.getFullYear()}년 ${pivotDate.getMonth() + 1}월`;
 
   useEffect(() => {
+    setPageTitle("Jinny's Emotional Diary");
     if (data.length >= 1) {
       const { beginTimeStamp, endTimeStamp } = getMonthRangeByDate(pivotDate);
       setFilteredData(

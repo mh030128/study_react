@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { DiaryDispatchContext } from "../App";
+import { setPageTitle } from "../util";
 import useDiary from "../hooks/useDiary";
 import Button from "../component/Button";
 import Header from "../component/Header";
@@ -12,6 +13,10 @@ const Edit = () => {
   const navigate = useNavigate();
   const { onUpdate, onDelete } = useContext(DiaryDispatchContext);
 
+  useEffect(() => {
+    setPageTitle(`${id}번 일기 수정하기`);
+  }, []);
+  
   const onSubmit = (data) => {
     if (window.confirm("일기를 수정할까요?")) {
       const { date, content, emotionId } = data;
